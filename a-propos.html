@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="À propos de Vertex Link — Agence web, notre histoire, nos valeurs, notre stack technique.">
+<title>À propos — Vertex Link</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.page-hero{
+  padding:calc(var(--nav-h) + clamp(3rem,8vw,6rem)) var(--pad) clamp(3rem,6vw,5rem);
+  border-bottom:1px solid var(--border);position:relative;overflow:hidden;
+}
+.page-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,0,0,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.055) 1px,transparent 1px);background-size:48px 48px;}
+.page-hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 50% 50%,transparent 40%,rgba(255,255,255,.9) 100%);}
+.page-hero__inner{max-width:var(--max);margin:0 auto;position:relative;z-index:1;}
+.page-hero__num{font-family:var(--f-m);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);margin-bottom:.75rem;display:block;}
+.page-hero__h1{font-family:var(--f-d);font-weight:800;font-size:clamp(2.4rem,5vw,4.5rem);letter-spacing:-.045em;line-height:1.02;color:var(--white);margin-bottom:1.25rem;}
+.page-hero__h1 em{font-style:normal;color:var(--acc);}
+.page-hero__p{font-family:var(--f-m);font-size:.86rem;color:var(--muted);line-height:1.8;max-width:46ch;}
+
+/* ── MANIFESTO ── */
+.manifesto{
+  font-family:var(--f-d);font-weight:700;
+  font-size:clamp(1.25rem,2.5vw,1.9rem);
+  letter-spacing:-.03em;line-height:1.4;
+  color:var(--white);max-width:800px;
+}
+.manifesto em{font-style:normal;color:var(--acc);}
+
+/* ── VALUES GRID ── */
+.values-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;
+  margin-top:3rem;
+}
+.value-item{
+  background:var(--bg-2);border:1px solid var(--border);
+  border-radius:14px;padding:2rem;
+  transition:border-color .25s,transform .25s var(--ease);
+}
+.value-item:hover{border-color:var(--acc);transform:translateY(-2px);}
+.value-num{
+  font-family:var(--f-m);font-size:.68rem;letter-spacing:.1em;
+  color:var(--acc);margin-bottom:1rem;display:block;
+}
+.value-title{
+  font-family:var(--f-d);font-weight:800;font-size:1.1rem;
+  letter-spacing:-.025em;color:var(--white);margin-bottom:.5rem;
+}
+.value-desc{font-family:var(--f-m);font-size:.8rem;color:var(--muted);line-height:1.75;}
+
+/* ── STACK ── */
+.stack-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;
+  margin-top:3rem;
+}
+.stack-item{
+  background:var(--bg-2);border:1px solid var(--border);
+  border-radius:10px;padding:1.25rem 1.5rem;
+  display:flex;align-items:center;gap:.75rem;
+  transition:border-color .2s,background .2s;
+}
+.stack-item:hover{border-color:var(--acc);background:var(--bg-3);}
+.stack-icon{font-size:1.25rem;flex-shrink:0;}
+.stack-name{font-family:var(--f-d);font-weight:700;font-size:.88rem;letter-spacing:-.01em;color:var(--white);}
+.stack-type{font-family:var(--f-m);font-size:.64rem;color:var(--muted);}
+
+/* ── TIMELINE ── */
+.timeline{margin-top:3rem;display:flex;flex-direction:column;gap:0;}
+.tl-item{
+  display:grid;grid-template-columns:80px 2px 1fr;
+  align-items:start;gap:0 1.5rem;
+  padding-bottom:2.5rem;position:relative;
+}
+.tl-item:last-child{padding-bottom:0;}
+.tl-item:last-child .tl-line{background:transparent;}
+.tl-step{
+  font-family:var(--f-m);font-size:.68rem;letter-spacing:.06em;
+  color:var(--acc);padding-top:.2rem;text-align:right;
+}
+.tl-line{
+  background:var(--border);width:100%;height:100%;
+  position:relative;
+}
+.tl-line::before{
+  content:'';position:absolute;top:.2rem;left:50%;transform:translateX(-50%);
+  width:7px;height:7px;border-radius:50%;
+  background:var(--acc);box-shadow:0 0 8px var(--acc-glow);
+}
+.tl-content{padding-top:.05rem;}
+.tl-title{font-family:var(--f-d);font-weight:700;font-size:.95rem;color:var(--white);margin-bottom:.3rem;}
+.tl-desc{font-family:var(--f-m);font-size:.78rem;color:var(--muted);line-height:1.7;}
+
+@media(max-width:768px){
+  .values-grid{grid-template-columns:1fr;}
+  .stack-grid{grid-template-columns:1fr 1fr;}
+  .tl-item{grid-template-columns:56px 2px 1fr;}
+}
+@media(max-width:480px){
+  .stack-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div id="vl-cursor"></div><div id="vl-ring"></div><div id="vl-prog"></div>
+
+<header class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">
+      <img src="logo.png" alt="VL" style="width:32px;height:32px;object-fit:contain;background:#111111;border-radius:9px;padding:5px;">
+      <span style="font-family:var(--f-d);font-weight:800;font-size:1.05rem;letter-spacing:-.02em;color:#111111">Vertex Link</span>
+    </a>
+    <nav class="nav__links">
+      <a href="index.html" class="nav__link">Accueil</a>
+      <a href="services.html" class="nav__link">Services</a>
+      <a href="portfolio.html" class="nav__link">Portfolio</a>
+      <a href="a-propos.html" class="nav__link active">À propos</a>
+      <a href="contact.html" class="nav__link">Contact</a>
+    </nav>
+    <a href="contact.html" class="nav__cta">Réserver un appel</a>
+    <button class="nav__burger"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<nav class="mobile-nav">
+  <a href="index.html">Accueil</a><a href="services.html">Services</a>
+  <a href="portfolio.html">Portfolio</a><a href="a-propos.html" class="active">À propos</a>
+  <a href="contact.html">Contact</a>
+  <a href="contact.html" class="m-cta">Réserver un appel →</a>
+</nav>
+
+<main>
+
+<div class="page-hero">
+  <div class="page-hero__inner">
+    <span class="page-hero__num" data-r>À propos</span>
+    <h1 class="page-hero__h1" data-r data-d="1">On construit,<br><em>on ne décore pas.</em></h1>
+    <p class="page-hero__p" data-r data-d="2">Vertex Link c'est une conviction : chaque business mérite un site aussi sérieux que son activité. Pas un template acheté 29€.</p>
+  </div>
+</div>
+
+<!-- Manifesto -->
+<section class="section">
+  <div class="section__inner">
+    <p class="eyebrow" data-r>Notre conviction</p>
+    <p class="manifesto" data-r data-d="1">
+      Trop de sites web sont des <em>vitrines vides.</em> Beaux en apparence, invisibles sur Google, lents sur mobile, oubliés dès la mise en ligne. On fait le contraire — chaque projet est construit pour <em>durer, performer, convertir.</em>
+    </p>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- Valeurs -->
+<section class="section">
+  <div class="section__inner">
+    <p class="eyebrow" data-r>Ce qui nous guide</p>
+    <h2 class="h2" data-r data-d="1">Nos <em>valeurs.</em></h2>
+    <div class="values-grid">
+      <div class="value-item" data-r>
+        <span class="value-num">01</span>
+        <div class="value-title">L'obsession du détail</div>
+        <p class="value-desc">Chaque pixel, chaque milliseconde de chargement, chaque balise meta — rien n'est laissé au hasard. Un site livré chez nous, c'est un site audité, testé, documenté.</p>
+      </div>
+      <div class="value-item" data-r data-d="1">
+        <span class="value-num">02</span>
+        <div class="value-title">Zéro template</div>
+        <p class="value-desc">On n'ouvre pas Wix, on n'achète pas de thème WordPress. Chaque ligne de code est écrite pour vous, pour votre activité, pour votre cible.</p>
+      </div>
+      <div class="value-item" data-r data-d="2">
+        <span class="value-num">03</span>
+        <div class="value-title">Transparence totale</div>
+        <p class="value-desc">Tarifs clairs, délais tenus, livrables documentés. Vous savez ce que vous payez, quand vous le recevez, et comment le gérer ensuite.</p>
+      </div>
+      <div class="value-item" data-r data-d="3">
+        <span class="value-num">04</span>
+        <div class="value-title">Performance avant tout</div>
+        <p class="value-desc">Lighthouse 95+ n'est pas un objectif, c'est un minimum. SEO, Core Web Vitals, accessibilité — tout est intégré dès la première ligne, pas ajouté après.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- Stack technique -->
+<section class="section">
+  <div class="section__inner">
+    <p class="eyebrow" data-r>Notre stack</p>
+    <h2 class="h2" data-r data-d="1">Les outils <em>qu'on maîtrise.</em></h2>
+    <div class="stack-grid">
+      <div class="stack-item" data-r><span class="stack-icon">🌐</span><div><div class="stack-name">HTML5</div><div class="stack-type">Structure</div></div></div>
+      <div class="stack-item" data-r data-d="1"><span class="stack-icon">🎨</span><div><div class="stack-name">CSS3</div><div class="stack-type">Style & animations</div></div></div>
+      <div class="stack-item" data-r data-d="2"><span class="stack-icon">⚙️</span><div><div class="stack-name">JavaScript</div><div class="stack-type">Interactions</div></div></div>
+      <div class="stack-item" data-r data-d="3"><span class="stack-icon">🚀</span><div><div class="stack-name">hébergement</div><div class="stack-type">Déploiement</div></div></div>
+      <div class="stack-item" data-r data-d="1"><span class="stack-icon">📊</span><div><div class="stack-name">Lighthouse</div><div class="stack-type">Audit perf.</div></div></div>
+      <div class="stack-item" data-r data-d="2"><span class="stack-icon">🔍</span><div><div class="stack-name">SEO technique</div><div class="stack-type">Référencement</div></div></div>
+      <div class="stack-item" data-r data-d="3"><span class="stack-icon">📱</span><div><div class="stack-name">Responsive</div><div class="stack-type">Mobile-first</div></div></div>
+      <div class="stack-item" data-r data-d="4"><span class="stack-icon">🛡</span><div><div class="stack-name">Formspree</div><div class="stack-type">Formulaires</div></div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- Process timeline -->
+<section class="section">
+  <div class="section__inner">
+    <p class="eyebrow" data-r>Notre méthode</p>
+    <h2 class="h2" data-r data-d="1">De l'idée au live<br><em>en 14 jours.</em></h2>
+    <div class="timeline" style="margin-top:3rem">
+      <div class="tl-item" data-r>
+        <span class="tl-step">Jour 1–2</span>
+        <div class="tl-line"></div>
+        <div class="tl-content">
+          <div class="tl-title">Brief & stratégie</div>
+          <p class="tl-desc">Analyse de votre activité, cible, concurrents, objectifs. On fixe le cap et on aligne le contenu.</p>
+        </div>
+      </div>
+      <div class="tl-item" data-r data-d="1">
+        <span class="tl-step">Jour 3–5</span>
+        <div class="tl-line"></div>
+        <div class="tl-content">
+          <div class="tl-title">Maquette & validation</div>
+          <p class="tl-desc">Maquette haute fidélité soumise pour validation. Ce qu'on approuve, on le code exactement.</p>
+        </div>
+      </div>
+      <div class="tl-item" data-r data-d="2">
+        <span class="tl-step">Jour 6–12</span>
+        <div class="tl-line"></div>
+        <div class="tl-content">
+          <div class="tl-title">Développement</div>
+          <p class="tl-desc">Code HTML/CSS/JS pur, responsive, SEO intégré. Tests Lighthouse à chaque étape.</p>
+        </div>
+      </div>
+      <div class="tl-item" data-r data-d="3">
+        <span class="tl-step">Jour 13–14</span>
+        <div class="tl-line"></div>
+        <div class="tl-content">
+          <div class="tl-title">Tests & mise en ligne</div>
+          <p class="tl-desc">Audit final, DNS configuré, domaine live. Rapport Lighthouse fourni. Votre site est opérationnel.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <div class="cta-band__glow"></div>
+  <div class="cta-band__inner">
+    <div data-r>
+      <h2 class="cta-band__h2">Prêt à travailler<br><em>ensemble ?</em></h2>
+      <p class="cta-band__sub">Devis gratuit · Réponse 24h · Sans engagement</p>
+    </div>
+    <div class="cta-band__btns" data-r data-d="2">
+      <a href="contact.html" class="btn btn--acc">Réserver un appel <span class="arr">→</span></a>
+      <a href="portfolio.html" class="btn btn--ghost">Voir nos réalisations</a>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__top">
+      <div>
+        <div class="footer__logo"><img src="logo.png" alt="VL" style="width:28px;height:28px;object-fit:contain;background:#111111;border-radius:8px;padding:4px;">VertexLink</div>
+        <p class="footer__desc">Agence web spécialisée en sites vitrines, landing pages et SEO. Code sur mesure.</p>
+      </div>
+      <div class="footer__col"><h3 class="footer__col-title">Navigation</h3><ul><li><a href="index.html">Accueil</a></li><li><a href="services.html">Services</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="a-propos.html">À propos</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer__col"><h3 class="footer__col-title">Services</h3><ul><li><a href="services.html">Site Vitrine — 497€</a></li><li><a href="services.html">Landing Page — 297€</a></li><li><a href="services.html">Audit & SEO</a></li></ul></div>
+      <div class="footer__col"><h3 class="footer__col-title">Contact</h3><ul><li><a href="mailto:vertexlink33@gmail.com">vertexlink33@gmail.com</a></li><li><a href="https://instagram.com/vertexlink_" target="_blank">@vertexlink_</a></li></ul></div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__copy">© 2025 Vertex Link — Tous droits réservés</p>
+      <div class="footer__social"><a href="mailto:vertexlink33@gmail.com">Email</a><a href="https://instagram.com/vertexlink_" target="_blank">Instagram</a></div>
+    </div>
+  </div>
+</footer>
+<script src="shared.js"></script>
+</body>
+</html>

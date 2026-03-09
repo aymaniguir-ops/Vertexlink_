@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Vertex Link — Sites vitrines et landing pages sur mesure. Code premium, Lighthouse 95+.">
+<title>Vertex Link — Agence Web</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* ─── RESET COULEURS POUR THÈME BLANC PULSOR ─── */
+:root {
+  --bg:      #FFFFFF;
+  --bg-2:    #F8F8F8;
+  --bg-3:    #EFEFEF;
+  --border:  rgba(0,0,0,.08);
+  --border-m:rgba(0,0,0,.14);
+  --white:   #111111;
+  --muted:   rgba(0,0,0,.48);
+  --faint:   rgba(0,0,0,.26);
+  --acc:     #111111;
+  --acc-lt:  #444;
+  --acc-dim: rgba(0,0,0,.06);
+  --acc-glow:rgba(0,0,0,.08);
+}
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: var(--nav-h) var(--pad) 6rem;
+  position: relative;
+  background-color: #fff;
+  background-image:
+    linear-gradient(rgba(0,0,0,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,.045) 1px, transparent 1px);
+  background-size: 44px 44px;
+  /* Fade la grille vers le bas */
+  -webkit-mask-image: radial-gradient(ellipse 85% 75% at 50% 30%, black 30%, transparent 100%);
+  mask-image: radial-gradient(ellipse 85% 75% at 50% 30%, black 30%, transparent 100%);
+}
+/* Grille sans masque — overlay séparé pour pas affecter le contenu */
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(0,0,0,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,.04) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 0%, black 20%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 0%, black 20%, transparent 80%);
+  pointer-events: none; z-index: 0;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero-line {
+  position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 1px; height: 80px;
+  background: linear-gradient(transparent, rgba(0,0,0,.15));
+}
+
+.hero__badge {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-family: var(--f-m); font-size: .7rem; letter-spacing: .06em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,.5);
+  border: 1px solid rgba(0,0,0,.12);
+  padding: .3rem 1rem; border-radius: 100px;
+  margin-bottom: 3rem;
+  opacity: 0; animation: up .5s ease .1s forwards;
+}
+.badge-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 6px rgba(34,197,94,.8);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1}50%{opacity:.3} }
+
+.hero__h1 {
+  font-family: var(--f-d); font-weight: 800;
+  font-size: clamp(2.4rem, 5.5vw, 5rem);
+  letter-spacing: -.05em; line-height: .93;
+  color: #111111;
+  margin-bottom: 2rem;
+  opacity: 0; animation: up .9s cubic-bezier(.16,1,.3,1) .2s forwards;
+}
+.hero__h1 em { font-style: normal; color: #111; }
+
+.hero__sub {
+  font-family: var(--f-m); font-size: .95rem;
+  color: rgba(0,0,0,.45); line-height: 1.7;
+  max-width: 52ch; margin: 0 auto 3rem;
+  opacity: 0; animation: up .6s ease .45s forwards;
+}
+
+.hero__ctas {
+  display: flex; align-items: center; justify-content: center;
+  gap: .875rem; flex-wrap: wrap;
+  opacity: 0; animation: up .5s ease .6s forwards;
+}
+
+/* Bouton principal — noir pill avec shimmer */
+.btn-main {
+  display: inline-flex; align-items: center; gap: .6rem;
+  font-family: var(--f-d); font-weight: 700; font-size: .9rem;
+  letter-spacing: -.01em;
+  background: transparent; color: #111;
+  border: 1.5px solid rgba(0,0,0,.2);
+  padding: .85rem 2rem; border-radius: 100px;
+  text-decoration: none;
+  position: relative; overflow: hidden;
+  transition: transform .3s cubic-bezier(.16,1,.3,1), border-color .2s, background .2s, box-shadow .3s;
+}
+.btn-main::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgba(0,0,0,.04) 50%, transparent 60%);
+  transform: translateX(-100%);
+  transition: transform .6s ease;
+}
+.btn-main:hover { border-color: #111; background: rgba(0,0,0,.04); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,.08); }
+.btn-main:hover::after { transform: translateX(100%); }
+.btn-main:active { transform: translateY(0); }
+.btn-main .arr { transition: transform .3s cubic-bezier(.16,1,.3,1); }
+.btn-main:hover .arr { transform: translateX(4px); }
+
+/* Bouton secondaire — contour */
+.btn-sec {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-family: var(--f-d); font-weight: 600; font-size: .9rem;
+  letter-spacing: -.01em;
+  color: rgba(0,0,0,.55);
+  border: 1.5px solid rgba(0,0,0,.16);
+  padding: .85rem 1.75rem; border-radius: 100px;
+  text-decoration: none;
+  transition: color .2s, border-color .2s, background .2s, transform .25s;
+}
+.btn-sec:hover { color: #111; border-color: #111; background: rgba(0,0,0,.03); transform: translateY(-1px); }
+
+/* Social proof */
+.hero__proof {
+  margin-top: 3.5rem;
+  display: flex; align-items: center; justify-content: center;
+  gap: 1.5rem; flex-wrap: wrap;
+  opacity: 0; animation: up .5s ease .8s forwards;
+}
+.proof-stars { color: #111; font-size: .85rem; letter-spacing: .04em; }
+.proof-sep { width: 1px; height: 24px; background: rgba(0,0,0,.12); }
+.proof-txt { font-family: var(--f-m); font-size: .72rem; color: rgba(0,0,0,.4); }
+
+@keyframes up { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
+
+
+
+/* ─── FEATURES 3 blocs ─── */
+.feats {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  border-top: 1px solid rgba(0,0,0,.08);
+  border-bottom: 1px solid rgba(0,0,0,.08);
+  margin-top: 4rem;
+}
+.feat {
+  background: #fff; padding: 2.5rem 2rem;
+  border-right: 1px solid rgba(0,0,0,.08);
+  display: flex; flex-direction: column; gap: .875rem;
+  opacity: 0; transform: translateY(16px);
+  transition: background .2s, transform .3s cubic-bezier(.16,1,.3,1);
+}
+.feat:last-child { border-right: none; }
+.feat:hover { background: #fafafa; transform: translateY(-2px); }
+.feat.in { animation: up .6s cubic-bezier(.16,1,.3,1) forwards; }
+.feat:nth-child(2).in { animation-delay: .1s; }
+.feat:nth-child(3).in { animation-delay: .2s; }
+.feat:hover { background: #fafafa; }
+.feat-ico {
+  font-family: var(--f-m); font-size: .72rem; letter-spacing: .06em;
+  color: rgba(0,0,0,.35); margin-bottom: -.25rem;
+}
+.feat-t { font-family: var(--f-d); font-weight: 800; font-size: 1rem; letter-spacing: -.02em; color: #111; }
+.feat-d { font-family: var(--f-m); font-size: .77rem; color: rgba(0,0,0,.48); line-height: 1.75; }
+.feat-list { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:.35rem; }
+.feat-list li { font-family:var(--f-m); font-size:.74rem; color:rgba(0,0,0,.52); display:flex; gap:.5rem; }
+.feat-list li::before { content:'✓'; font-weight:700; color:#111; flex-shrink:0; }
+
+/* ─── PROCESS ─── */
+.process-wrap {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 5rem; align-items: start;
+  margin-top: 4rem;
+}
+.step-item {
+  display: grid; grid-template-columns: 2.5rem 1fr;
+  gap: 0 1.25rem; padding: 1.75rem 0;
+  border-bottom: 1px solid rgba(0,0,0,.07);
+  cursor: pointer; position: relative;
+  transition: padding-left .2s;
+}
+.step-item:last-child { border-bottom: none; }
+.step-item::before {
+  content:''; position:absolute; left:0; top:0; bottom:0;
+  width:2px; background:transparent; transition: background .25s;
+}
+.step-item.on::before { background: #111; }
+.step-item:hover { padding-left: .4rem; }
+.step-item.on { padding-left: .4rem; }
+.step-n { font-family:var(--f-m); font-size:.7rem; color:rgba(0,0,0,.3); padding-top:.1rem; }
+.step-item.on .step-n { color:#111; font-weight:700; }
+.step-t { font-family:var(--f-d); font-weight:800; font-size:.98rem; letter-spacing:-.02em; color:#111; margin-bottom:.35rem; }
+.step-d { font-family:var(--f-m); font-size:.77rem; color:rgba(0,0,0,.48); line-height:1.7; max-height:0; overflow:hidden; transition:max-height .4s ease, opacity .3s; opacity:0; }
+.step-item.on .step-d { max-height:100px; opacity:1; }
+
+/* Bloc code */
+.code-win {
+  position: sticky; top: calc(var(--nav-h) + 1.5rem);
+  background: #111; border-radius: 14px; overflow: hidden;
+  font-family: var(--f-m);
+}
+.cw-bar { display:flex; align-items:center; gap:.4rem; padding:.8rem 1.1rem; border-bottom:1px solid rgba(255,255,255,.06); background:rgba(255,255,255,.03); }
+.cw-d { width:7px; height:7px; border-radius:50%; }
+.cwd-r{background:#ff5f57}.cwd-y{background:#febc2e}.cwd-g{background:#28c840}
+.cw-file { margin-left:.4rem; font-size:.63rem; color:rgba(255,255,255,.32); }
+.cw-body { padding:1.4rem; }
+.cw-row { display:flex; gap:.9rem; line-height:2; }
+.cw-ln { font-size:.66rem; color:rgba(255,255,255,.16); user-select:none; min-width:.9rem; text-align:right; }
+.cw-code { font-size:.73rem; white-space:pre; }
+.ck{color:#79b8ff}.cs{color:#9ecbff}.cf{color:#b392f0}.cc{color:rgba(255,255,255,.28);font-style:italic}.cn{color:#ffab70}.cp{color:rgba(255,255,255,.65)}
+
+
+
+
+
+@media(max-width:900px){
+  .feats{grid-template-columns:1fr}
+  .process-wrap{grid-template-columns:1fr}
+  .code-win{display:none}
+  .stats-grid{grid-template-columns:1fr 1fr}
+}
+
+
+/* ── CURSOR CUSTOM ── */
+#vl-cursor { width:8px; height:8px; background:#111; border-radius:50%; position:fixed; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); transition:transform .1s; mix-blend-mode:difference; }
+#vl-ring   { width:36px; height:36px; border:1.5px solid rgba(0,0,0,.25); border-radius:50%; position:fixed; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:width .3s,height .3s,border-color .3s; }
+body:has(a:hover) #vl-ring, body:has(button:hover) #vl-ring { width:52px; height:52px; border-color:rgba(0,0,0,.5); }
+
+/* ── HERO MARQUEURS + ── */
+.hmark {
+  position:absolute; width:12px; height:12px; pointer-events:none; opacity:.2;
+}
+.hmark::before,.hmark::after { content:''; position:absolute; background:#111; }
+.hmark::before { width:1px; height:100%; left:5px; top:0; }
+.hmark::after  { height:1px; width:100%; top:5px; left:0; }
+.hm-tl { top:15%; left:6%; } .hm-tr { top:15%; right:6%; }
+.hm-bl { bottom:15%; left:6%; } .hm-br { bottom:15%; right:6%; }
+.hm-tc { top:5%; left:50%; transform:translateX(-50%); }
+
+/* ── TEXTE QUI COMPTE ── */
+.count-wrap { position:relative; display:inline-block; overflow:hidden; }
+
+/* ── LIGNE DE SÉPARATION ANIMÉE ── */
+.sep-line {
+  height:1px; background:rgba(0,0,0,.08);
+  transform-origin:left; transform:scaleX(0);
+  transition:transform .8s cubic-bezier(.16,1,.3,1);
+}
+.sep-line.in { transform:scaleX(1); }
+
+/* ── SECTION REVEAL GAUCHE→DROITE ── */
+[data-r] { opacity:0; transform:translateY(10px); transition:opacity .6s ease, transform .6s cubic-bezier(.16,1,.3,1); }
+[data-r].in { opacity:1; transform:none; }
+[data-r][data-d="1"] { transition-delay:.1s; }
+[data-r][data-d="2"] { transition-delay:.2s; }
+
+/* ── HOVER STEP ITEMS ── */
+.step-item { position:relative; }
+.step-item .step-bg {
+  position:absolute; inset:0; background:rgba(0,0,0,.025);
+  border-radius:8px; opacity:0;
+  transition:opacity .2s;
+  pointer-events:none;
+}
+.step-item:hover .step-bg { opacity:1; }
+
+/* ── CHIFFRES STATS — compteur ── */
+.stat-v { transition:transform .3s cubic-bezier(.16,1,.3,1); }
+.stat:hover .stat-v { transform:translateY(-2px); }
+
+/* ── BADGE HERO PULSE ── */
+.hero__badge {
+  animation: up .5s ease .1s forwards, badgePulse 3s ease 1.5s infinite;
+}
+@keyframes badgePulse {
+  0%,100% { box-shadow:0 0 0 0 rgba(0,0,0,.06); }
+  50%      { box-shadow:0 0 0 6px rgba(0,0,0,0); }
+}
+
+/* ── FEAT CARDS — ligne gauche au hover ── */
+.feat { border-left: 2px solid transparent; transition:border-color .25s, background .2s, transform .3s cubic-bezier(.16,1,.3,1); }
+.feat:hover { border-left-color: #111; }
+
+/* ── CTA BLOC — ligne décorative top ── */
+.cta-bloc::before {
+  content:''; position:absolute; top:0; left:10%; right:10%; height:1px;
+  background:linear-gradient(90deg, transparent, rgba(0,0,0,.15), transparent);
+}
+
+/* ── PROCESS CODE WIN — fade in ── */
+.code-win { opacity:0; transform:translateY(12px); transition:opacity .6s ease .3s, transform .6s cubic-bezier(.16,1,.3,1) .3s; }
+.code-win.in { opacity:1; transform:none; }
+
+/* ── MARQUEE PAUSE AU HOVER ── */
+.marquee-track { animation:marquee 30s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state:paused; }
+
+/* ── NAV LINKS SOULIGNEMENT ANIMÉ ── */
+.nav__link { position:relative; }
+.nav__link::after {
+  content:''; position:absolute; bottom:-2px; left:0; right:0;
+  height:1px; background:#111;
+  transform:scaleX(0); transform-origin:right;
+  transition:transform .25s cubic-bezier(.16,1,.3,1);
+}
+.nav__link:hover::after { transform:scaleX(1); transform-origin:left; }
+</style>
+
+
+
+
+<style id="finale-css">
+/* ════════════════════════════════
+   FINALE — KPIs + CTA
+════════════════════════════════ */
+.finale { padding: 0 var(--pad); }
+.finale__inner { max-width: var(--max); margin: 0 auto; padding-bottom: 5rem; }
+
+/* ── KPIs ── */
+.kpis {
+  display: flex; align-items: center;
+  border-top: 1px solid rgba(0,0,0,.08);
+  border-bottom: 1px solid rgba(0,0,0,.08);
+  padding: 3.5rem 0; margin-bottom: 5rem;
+}
+.kpi {
+  flex: 1; text-align: center;
+  opacity: 0; transform: translateY(12px);
+  transition: transform .35s cubic-bezier(.16,1,.3,1);
+}
+.kpi.on { opacity: 1; transform: none; }
+.kpi:nth-child(1) { transition-delay: .00s; }
+.kpi:nth-child(3) { transition-delay: .10s; }
+.kpi:nth-child(5) { transition-delay: .20s; }
+.kpi:nth-child(7) { transition-delay: .30s; }
+.kpi:hover { transform: translateY(-4px); }
+.kpi__sep { width:1px; height:2.5rem; background:rgba(0,0,0,.08); flex-shrink:0; }
+.kpi__num {
+  font-family: var(--f-d); font-weight: 800;
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: -.05em; line-height: 1;
+  color: #111; margin-bottom: .4rem;
+  display: flex; align-items: flex-start; justify-content: center; gap: .05em;
+}
+.kpi__num sup {
+  font-size: .42em; color: rgba(0,0,0,.3);
+  margin-top: .25em; font-weight: 700;
+}
+.kpi__lbl { font-family: var(--f-m); font-size: .7rem; color: rgba(0,0,0,.42); }
+
+/* ── CTA BAND ── */
+.cta-band {
+  display: grid; grid-template-columns: 1fr 1fr;
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 20px; overflow: hidden;
+  min-height: 460px;
+}
+
+/* Gauche */
+.cta-band__left {
+  padding: clamp(2.5rem,5vw,4rem);
+  display: flex; flex-direction: column;
+  justify-content: center; gap: 1.1rem;
+  border-right: 1px solid rgba(0,0,0,.08);
+}
+.ctab-avail {
+  display: inline-flex; align-items: center; gap: .45rem;
+  font-family: var(--f-m); font-size: .65rem;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(0,0,0,.4);
+}
+.ctab-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #22c55e; box-shadow: 0 0 6px rgba(34,197,94,.8);
+  animation: pulse 2s ease-in-out infinite; flex-shrink: 0;
+}
+.ctab-h {
+  font-family: var(--f-d); font-weight: 800;
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  letter-spacing: -.055em; line-height: .93; color: #111;
+}
+.ctab-line {
+  display: block; overflow: hidden;
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path .7s cubic-bezier(.16,1,.3,1);
+}
+.ctab-line:nth-child(2) { transition-delay: .1s; }
+.ctab-line:nth-child(3) { transition-delay: .2s; }
+.cta-band.on .ctab-line { clip-path: inset(0 0 0% 0); }
+.ctab-accent { font-style: italic; }
+.ctab-p { font-family: var(--f-m); font-size: .8rem; color: rgba(0,0,0,.44); line-height: 1.65; }
+.ctab-btns { display: flex; gap: .75rem; flex-wrap: wrap; align-items: center; }
+.ctab-note { font-family: var(--f-m); font-size: .64rem; color: rgba(0,0,0,.28); letter-spacing: .03em; }
+
+/* Bouton principal */
+.ctab-btn-main {
+  display: inline-flex; align-items: center; gap: .55rem;
+  font-family: var(--f-d); font-weight: 700; font-size: .87rem;
+  letter-spacing: -.01em; color: #fff; background: #111;
+  padding: .8rem 1.6rem; border-radius: 100px;
+  text-decoration: none; overflow: hidden; position: relative;
+  transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s;
+  box-shadow: 0 2px 0 #000;
+}
+.ctab-btn-main::after {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.12) 50%,transparent 70%);
+  transform:translateX(-100%); transition:transform .55s ease;
+}
+.ctab-btn-main:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.25); }
+.ctab-btn-main:hover::after { transform:translateX(100%); }
+.ctab-arrow { transition: transform .3s cubic-bezier(.16,1,.3,1); }
+.ctab-btn-main:hover .ctab-arrow { transform: translateX(5px); }
+
+.ctab-btn-ghost {
+  display:inline-flex; align-items:center;
+  font-family:var(--f-d); font-weight:600; font-size:.87rem;
+  letter-spacing:-.01em; color:rgba(0,0,0,.5);
+  border:1.5px solid rgba(0,0,0,.14); padding:.8rem 1.4rem;
+  border-radius:100px; text-decoration:none;
+  transition:color .2s,border-color .2s,transform .25s;
+}
+.ctab-btn-ghost:hover { color:#111; border-color:#111; transform:translateY(-1px); }
+
+/* Droite — visuel noir */
+.cta-band__right { background: #111; position: relative; overflow: hidden; }
+.ctab-visual { position: absolute; inset: 0; }
+.ctab-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Cartes flottantes sur fond noir */
+.ctab-card {
+  position: absolute;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 14px;
+  padding: 1.1rem 1.3rem;
+  backdrop-filter: blur(8px);
+}
+.ctab-card--score { bottom: 1.75rem; left: 1.75rem; min-width: 148px; animation: floatA 5s ease-in-out infinite; }
+.ctab-card--time  { top: 1.75rem; right: 1.75rem; animation: floatB 5s ease-in-out .6s infinite; }
+.ctab-card--live  {
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+  display: flex; align-items: center; gap: .6rem; white-space: nowrap;
+  animation: floatC 5s ease-in-out 1.1s infinite;
+}
+@keyframes floatA { 0%,100%{transform:translateY(0)}   50%{transform:translateY(-10px)} }
+@keyframes floatB { 0%,100%{transform:translateY(0)}   50%{transform:translateY(-8px)}  }
+@keyframes floatC { 0%,100%{transform:translate(-50%,-50%)} 50%{transform:translate(-50%,calc(-50% - 8px))} }
+
+.ctabc-label { display:block; font-family:var(--f-m); font-size:.6rem; color:rgba(255,255,255,.4); margin-bottom:.3rem; }
+.ctabc-big   { display:block; font-family:var(--f-d); font-weight:800; font-size:1.5rem; letter-spacing:-.04em; color:#fff; line-height:1; margin-bottom:.5rem; }
+.ctabc-sub   { display:block; font-family:var(--f-m); font-size:.6rem; color:rgba(255,255,255,.35); margin-top:.2rem; }
+.ctabc-bar   { height:3px; background:rgba(255,255,255,.1); border-radius:2px; overflow:hidden; }
+.ctabc-fill  { height:100%; width:0; background:#22c55e; border-radius:2px; transition:width 1.4s cubic-bezier(.16,1,.3,1) .5s; }
+.ctab-visual.on .ctabc-fill { width: 97%; }
+
+.ctabc-live-dot {
+  width:8px; height:8px; border-radius:50%; flex-shrink:0;
+  background:#22c55e; box-shadow:0 0 8px rgba(34,197,94,.9);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+.ctabc-live-txt { font-family:var(--f-d); font-weight:700; font-size:.85rem; color:#fff; }
+
+@media(max-width:900px){
+  .kpis { flex-wrap:wrap; gap:2rem; border:none; padding:2rem 0; }
+  .kpi  { flex:0 0 calc(50% - 1rem); text-align:left; }
+  .kpi__sep { display:none; }
+  .cta-band { grid-template-columns:1fr; }
+  .cta-band__left { border-right:none; border-bottom:1px solid rgba(0,0,0,.08); }
+  .cta-band__right { min-height:240px; }
+}
+</style>
+
+<style id="premium-anim">
+/* ══════════════════════════════════
+   ANIMATIONS PREMIUM
+══════════════════════════════════ */
+
+/* Hero words — animation d'entrée */
+.hero__h1 .word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .6s ease, transform .8s cubic-bezier(.16,1,.3,1);
+  transition-delay: var(--d, 0s);
+}
+/* On retire l'animation CSS conflictuelle sur h1 */
+.hero__h1 { opacity: 1 !important; animation: none !important; }
+
+/* Eyebrow + H2 sections — slide up */
+.eyebrow {
+  opacity: 0; transform: translateY(10px);
+  transition: opacity .5s ease, transform .6s cubic-bezier(.16,1,.3,1);
+}
+.eyebrow.in { opacity: 1; transform: none; }
+.h2 {
+  opacity: 0; transform: translateY(12px);
+  transition: opacity .6s ease .08s, transform .7s cubic-bezier(.16,1,.3,1) .08s;
+}
+.h2.in { opacity: 1; transform: none; }
+
+/* Feat cards — stagger propre */
+.feat {
+  opacity: 0; transform: translateY(18px);
+  /* On retire la transition conflictuelle */
+  transition: opacity .55s ease, transform .65s cubic-bezier(.16,1,.3,1),
+              background .2s, border-color .25s;
+}
+.feat:nth-child(1) { transition-delay: 0s; }
+.feat:nth-child(2) { transition-delay: .1s; }
+.feat:nth-child(3) { transition-delay: .2s; }
+.feat.in { opacity: 1; transform: none; }
+/* hover après que in soit déclenché */
+.feat.in:hover { transform: translateY(-3px) !important; }
+
+/* KPIs — transition smooth sans animation CSS */
+.kpi {
+  transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);
+}
+.kpi:nth-child(1) { transition-delay: .00s; }
+.kpi:nth-child(3) { transition-delay: .12s; }
+.kpi:nth-child(5) { transition-delay: .24s; }
+.kpi:nth-child(7) { transition-delay: .36s; }
+.kpi.on:hover { transform: translateY(-5px) !important; transition-delay: 0s !important; }
+
+/* CTA band — title lines */
+.ctab-line {
+  display: block;
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path .75s cubic-bezier(.16,1,.3,1);
+}
+.ctab-line:nth-child(1) { transition-delay: .00s; }
+.ctab-line:nth-child(2) { transition-delay: .12s; }
+.ctab-line:nth-child(3) { transition-delay: .24s; }
+.cta-band.on .ctab-line { clip-path: inset(0 0 0% 0); }
+
+/* Code window — apparition avec blur */
+.code-win {
+  opacity: 0;
+  filter: blur(4px);
+  transform: translateY(16px);
+  transition: opacity .7s ease .25s, filter .7s ease .25s, transform .7s cubic-bezier(.16,1,.3,1) .25s;
+}
+.code-win.in { opacity: 1; filter: blur(0); transform: none; }
+
+/* Sep line */
+.sep-line {
+  transform-origin: left; transform: scaleX(0);
+  transition: transform .9s cubic-bezier(.16,1,.3,1);
+}
+.sep-line.in { transform: scaleX(1); }
+
+/* Hero parallax léger */
+@media(hover:hover){
+  .hero__h1, .hero__sub, .hero__ctas, .hero__proof {
+    will-change: transform;
+  }
+}
+
+/* Hover sur step-item — fond qui glisse */
+.step-item {
+  transition: padding-left .25s cubic-bezier(.16,1,.3,1);
+}
+.step-item::after {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 0; background: rgba(0,0,0,.025);
+  transition: width .3s cubic-bezier(.16,1,.3,1);
+  border-radius: 0 6px 6px 0;
+}
+.step-item:hover::after { width: 100%; }
+
+/* Marquee hover */
+.marquee-track { animation: marquee 28s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+
+/* Nav underline */
+.nav__link { position: relative; }
+.nav__link::after {
+  content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+  height: 1px; background: #111;
+  transform: scaleX(0); transform-origin: right;
+  transition: transform .28s cubic-bezier(.16,1,.3,1);
+}
+.nav__link:hover::after { transform: scaleX(1); transform-origin: left; }
+
+/* Barres lighthouse animée à l'entrée */
+.ctabc-fill {
+  height: 100%; width: 0; background: #22c55e;
+  border-radius: 2px;
+  transition: width 1.6s cubic-bezier(.16,1,.3,1) .6s;
+}
+.ctab-visual.on .ctabc-fill { width: 97%; }
+
+/* Cartes flottantes — entrée + float */
+.ctab-card {
+  opacity: 0;
+  transition: opacity .5s ease;
+}
+.ctab-visual.on .ctab-card { opacity: 1; }
+.ctab-visual.on .ctab-card--score { transition-delay: .2s; }
+.ctab-visual.on .ctab-card--time  { transition-delay: .4s; }
+.ctab-visual.on .ctab-card--live  { transition-delay: .6s; }
+
+</style>
+
+</head>
+<body>
+<div id="vl-cursor"></div><div id="vl-ring"></div><div id="vl-prog"></div>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">
+      <img src="logo.png" alt="VL" style="width:40px;height:40px;object-fit:contain;background:#111111;border-radius:10px;padding:6px;">
+      <span style="font-family:var(--f-d);font-weight:800;font-size:1.05rem;letter-spacing:-.02em;color:#111">Vertex Link</span>
+    </a>
+    <nav class="nav__links">
+      <a href="services.html" class="nav__link">Services</a>
+      <a href="portfolio.html" class="nav__link">Projets</a>
+      <a href="a-propos.html" class="nav__link">À propos</a>
+      <a href="contact.html" class="nav__link">Contact</a>
+    </nav>
+    <a href="contact.html" class="nav__cta">Réserver un appel</a>
+    <button class="nav__burger"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<nav class="mobile-nav">
+  <a href="services.html">Services</a><a href="portfolio.html">Projets</a>
+  <a href="a-propos.html">À propos</a><a href="contact.html">Contact</a>
+  <a href="contact.html" class="m-cta">Réserver un appel →</a>
+</nav>
+
+<main>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hmark hm-tl"></div>
+  <div class="hmark hm-tr"></div>
+  <div class="hmark hm-bl"></div>
+  <div class="hmark hm-br"></div>
+  <div class="hmark hm-tc"></div>
+  <div class="hero__badge"><span class="badge-dot"></span>Disponible — Nouveau projet</div>
+
+  <h1 class="hero__h1" id="hero-title">
+    <span class="word" style="--d:0s">Des sites qui</span><br>
+    <span class="word" style="--d:.08s">donnent envie</span><br>
+    <span class="word" style="--d:.16s">d'<em>agir.</em></span>
+  </h1>
+
+  <p class="hero__sub">Sites vitrines &amp; landing pages codés à la main — zéro template, design exclusif, livré en 14 jours.</p>
+
+  <div class="hero__ctas">
+    <a href="contact.html" class="btn-main">Réserver un appel <span class="arr">→</span></a>
+    <a href="portfolio.html" class="btn-sec">Voir nos projets</a>
+  </div>
+
+  <div class="hero__proof">
+    <span class="proof-stars">★★★★★</span>
+    <span class="proof-sep"></span>
+    <span class="proof-txt">4.9 · Avis clients vérifiés</span>
+    <span class="proof-sep"></span>
+    <span class="proof-txt">Réponse sous 24h</span>
+  </div>
+
+  
+  <span style="position:absolute;bottom:2.5rem;left:var(--pad);font-family:var(--f-m);font-size:.62rem;letter-spacing:.08em;color:rgba(0,0,0,.25);text-transform:uppercase;z-index:1">FR — Remote</span>
+  <span style="position:absolute;bottom:2.5rem;right:var(--pad);font-family:var(--f-m);font-size:.62rem;letter-spacing:.08em;color:rgba(0,0,0,.25);text-transform:uppercase;z-index:1">© 2025</span>
+
+  <div class="hero-line"></div>
+</section>
+
+<div style="padding:0 var(--pad)"><div class="sep-line" style="max-width:var(--max);margin:0 auto"></div></div>
+<!-- FEATURES -->
+<section class="section">
+  <div class="section__inner">
+    <p class="eyebrow" data-r>Ce qu'on fait</p>
+    <h2 class="h2" data-r data-d="1">Un site qui travaille<br>pour vous.</h2>
+    <div class="feats">
+      <div class="feat">
+        <div class="feat-ico">01</div>
+        <div class="feat-t">Code qui performe</div>
+        <p class="feat-d">Chaque page est construite à la main. Pas de builder, pas de surcharge — juste du code propre qui charge vite.</p>
+        <ul class="feat-list"><li>Lighthouse 95+ garanti</li><li>Core Web Vitals au vert</li><li>Code propre et minifié</li></ul>
+      </div>
+      <div class="feat">
+        <div class="feat-ico">02</div>
+        <div class="feat-t">Design taillé pour vous</div>
+        <p class="feat-d">On part de votre activité, vos clients, votre ton. Le design découle de ça — pas d'un template existant.</p>
+        <ul class="feat-list"><li>Design 100% sur mesure</li><li>Mobile-first responsive</li><li>Identité visuelle cohérente</li></ul>
+      </div>
+      <div class="feat">
+        <div class="feat-ico">03</div>
+        <div class="feat-t">Visible sur Google</div>
+        <p class="feat-d">Structure, balises, vitesse — tout ce que Google regarde est traité dès le départ, pas ajouté après.</p>
+        <ul class="feat-list"><li>Structure SEO on-page</li><li>Schema.org + balises meta</li><li>Analytics inclus</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section">
+  <div class="section__inner">
+    <p class="eyebrow" data-r>Comment ça marche</p>
+    <h2 class="h2" data-r data-d="1">4 étapes.<br>Zéro surprise.</h2>
+    <div class="process-wrap">
+      <div id="steps">
+        <div class="step-item on" data-i="0"><div class="step-bg"></div>
+          <span class="step-n">01</span>
+          <div><div class="step-t">On clarifie le projet</div><p class="step-d">Objectifs, cible, délais. On définit tout clairement avant de démarrer — aucune zone floue.</p></div>
+        </div>
+        <div class="step-item" data-i="1"><div class="step-bg"></div>
+          <span class="step-n">02</span>
+          <div><div class="step-t">On pose les bases</div><p class="step-d">Maquette et structure validées par vous avant qu'une seule ligne de code soit écrite.</p></div>
+        </div>
+        <div class="step-item" data-i="2"><div class="step-bg"></div>
+          <span class="step-n">03</span>
+          <div><div class="step-t">On développe</div><p class="step-d">HTML/CSS/JS codé à la main. Propre, rapide, responsive. Zéro builder, zéro template.</p></div>
+        </div>
+        <div class="step-item" data-i="3"><div class="step-bg"></div>
+          <span class="step-n">04</span>
+          <div><div class="step-t">On livre et on reste là</div><p class="step-d">Mise en ligne, DNS, hébergement inclus. Support post-livraison pour que tout reste au vert.</p></div>
+        </div>
+      </div>
+      <div class="code-win">
+        <div class="cw-bar">
+          <span class="cw-d cwd-r"></span><span class="cw-d cwd-y"></span><span class="cw-d cwd-g"></span>
+          <span class="cw-file" id="cw-file">brief.json</span>
+        </div>
+        <div class="cw-body" id="cw-body"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS + CTA -->
+<section class="finale">
+  <div class="finale__inner">
+
+    <!-- KPIs : 4 chiffres sur une ligne, propres -->
+    <div class="kpis">
+      <div class="kpi" id="kpi1">
+        <div class="kpi__num"><span class="kn" data-to="97">97</span><sup>+</sup></div>
+        <div class="kpi__lbl">Score Lighthouse</div>
+      </div>
+      <div class="kpi__sep"></div>
+      <div class="kpi" id="kpi2">
+        <div class="kpi__num"><span class="kn" data-to="14">14</span><sup>j</sup></div>
+        <div class="kpi__lbl">Délai livraison</div>
+      </div>
+      <div class="kpi__sep"></div>
+      <div class="kpi" id="kpi3">
+        <div class="kpi__num">2<sup>×</sup></div>
+        <div class="kpi__lbl">Paiement sans frais</div>
+      </div>
+      <div class="kpi__sep"></div>
+      <div class="kpi" id="kpi4">
+        <div class="kpi__num">0<sup>€</sup></div>
+        <div class="kpi__lbl">Frais cachés</div>
+      </div>
+    </div>
+
+    <!-- Bandeau CTA final : texte à gauche, visuel noir à droite -->
+    <div class="cta-band">
+      <div class="cta-band__left">
+        <div class="ctab-avail"><span class="ctab-dot"></span>Disponible maintenant</div>
+        <h2 class="ctab-h">
+          <span class="ctab-line">Votre site,</span>
+          <span class="ctab-line">codé à la</span>
+          <span class="ctab-line ctab-accent">main.</span>
+        </h2>
+        <p class="ctab-p">Devis gratuit · Réponse sous 24h · Sans engagement</p>
+        <div class="ctab-btns">
+          <a href="contact.html" class="ctab-btn-main">
+            Réserver un appel
+            <span class="ctab-arrow">→</span>
+          </a>
+          <a href="services.html" class="ctab-btn-ghost">Voir les offres</a>
+        </div>
+        <p class="ctab-note">Paiement en 2× · Hébergement inclus · Support inclus</p>
+      </div>
+
+      <div class="cta-band__right">
+        <div class="ctab-visual">
+          <div class="ctab-grid"></div>
+          <!-- Cartes flottantes -->
+          <div class="ctab-card ctab-card--score">
+            <span class="ctabc-label">Lighthouse</span>
+            <span class="ctabc-big">97</span>
+            <div class="ctabc-bar"><div class="ctabc-fill"></div></div>
+          </div>
+          <div class="ctab-card ctab-card--time">
+            <span class="ctabc-label">Livraison</span>
+            <span class="ctabc-big">14j</span>
+            <span class="ctabc-sub">chrono</span>
+          </div>
+          <div class="ctab-card ctab-card--live">
+            <span class="ctabc-live-dot"></span>
+            <span class="ctabc-live-txt">En ligne</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item">HTML / CSS / JS<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Design sur mesure<span class="marquee-dot"></span></span>
+    <span class="marquee-item">SEO Technique<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Core Web Vitals<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Mobile First<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Lighthouse 95+<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Hébergement inclus<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Pixel Meta<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Google Analytics<span class="marquee-dot"></span></span>
+    <span class="marquee-item">HTML / CSS / JS<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Design sur mesure<span class="marquee-dot"></span></span>
+    <span class="marquee-item">SEO Technique<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Core Web Vitals<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Mobile First<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Lighthouse 95+<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Hébergement inclus<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Pixel Meta<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Google Analytics<span class="marquee-dot"></span></span>
+  </div>
+</div>
+
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__top">
+      <div>
+        <div class="footer__logo">
+          <img src="logo.png" alt="VL" style="width:30px;height:30px;object-fit:contain;background:#111;border-radius:8px;padding:4px;">
+          Vertex Link
+        </div>
+        <p class="footer__desc">Agence web — sites vitrines &amp; landing pages codés sur mesure.</p>
+      </div>
+      <div class="footer__col"><h3 class="footer__col-title">Navigation</h3><ul><li><a href="services.html">Services</a></li><li><a href="portfolio.html">Projets</a></li><li><a href="a-propos.html">À propos</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer__col"><h3 class="footer__col-title">Offres</h3><ul><li><a href="services.html">Pack Starter — 397€</a></li><li><a href="services.html">Pack Premium — 500€</a></li><li><a href="services.html">Sur mesure</a></li></ul></div>
+      <div class="footer__col"><h3 class="footer__col-title">Contact</h3>
+        <ul><li><a href="mailto:vertexlink33@gmail.com">vertexlink33@gmail.com</a></li><li><a href="https://instagram.com/vertexlink_" target="_blank">@vertexlink_</a></li></ul>
+        <div style="margin-top:1.5rem"><a href="contact.html" class="btn-main" style="font-size:.78rem;padding:.6rem 1.25rem">Réserver un appel →</a></div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__copy">© 2025 Vertex Link — Tous droits réservés</p>
+      <div class="footer__social"><a href="mailto:vertexlink33@gmail.com">Email</a><a href="https://instagram.com/vertexlink_" target="_blank">Instagram</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+<script>
+/* ═══════════════════════════════════════
+   VERTEX LINK — JS PRINCIPAL
+   Réécrit proprement, zéro doublon
+═══════════════════════════════════════ */
+
+// ── 1. CURSOR CUSTOM ──
+(function(){
+  const cur = document.getElementById('vl-cursor');
+  const ring = document.getElementById('vl-ring');
+  if(!cur || !ring || window.matchMedia('(hover:none)').matches) return;
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; cur.style.left=mx+'px'; cur.style.top=my+'px'; });
+  const lerp=(a,b,t)=>a+(b-a)*t;
+  (function loop(){ rx=lerp(rx,mx,.12); ry=lerp(ry,my,.12); ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(loop); })();
+})();
+
+
+// ── HERO PARALLAX au mousemove ──
+(function(){
+  const hero = document.querySelector('.hero');
+  if(!hero || window.matchMedia('(hover:none)').matches) return;
+  const layers = [
+    {el: hero.querySelector('.hero__h1'),    speed: .018},
+    {el: hero.querySelector('.hero__sub'),   speed: .010},
+    {el: hero.querySelector('.hero__ctas'),  speed: .006},
+    {el: hero.querySelector('.hero__proof'), speed: .004},
+  ].filter(l=>l.el);
+  let tx=0,ty=0,cx=0,cy=0;
+  const W=window.innerWidth/2, H=window.innerHeight/2;
+  hero.addEventListener('mousemove',e=>{
+    tx = (e.clientX-W)/W;
+    ty = (e.clientY-H)/H;
+  });
+  hero.addEventListener('mouseleave',()=>{ tx=0; ty=0; });
+  (function loop(){
+    cx+=(tx-cx)*.07; cy+=(ty-cy)*.07;
+    layers.forEach(l=>{
+      l.el.style.transform=`translate(${cx*l.speed*40}px,${cy*l.speed*40}px)`;
+    });
+    requestAnimationFrame(loop);
+  })();
+})();
+
+// ── 2. CODE WINDOW (process) ──
+const snips=[
+  {f:'brief.json',l:[
+    {n:'1',c:'<span class="cp">{</span>'},
+    {n:'2',c:'  <span class="cs">"Objectif"</span><span class="cp">:</span> <span class="cs">"Convertir vos visiteurs"</span><span class="cp">,</span>'},
+    {n:'3',c:'  <span class="cs">"Cible"</span><span class="cp">:</span> <span class="cs">"Vos clients idéaux"</span><span class="cp">,</span>'},
+    {n:'4',c:'  <span class="cs">"Délai"</span><span class="cp">:</span> <span class="cs">"14 jours"</span><span class="cp">,</span>'},
+    {n:'5',c:'  <span class="cs">"Risque"</span><span class="cp">:</span> <span class="cs">"Zéro"</span>'},
+    {n:'6',c:'<span class="cp">}</span>'},
+  ]},
+  {f:'design.css',l:[
+    {n:'1',c:'<span class="cc">/* Votre identité */</span>'},
+    {n:'2',c:'<span class="cp">:root {</span>'},
+    {n:'3',c:'  <span class="ck">--couleur</span><span class="cp">:</span> <span class="cs">votre marque</span><span class="cp">;</span>'},
+    {n:'4',c:'  <span class="ck">--mobile</span><span class="cp">:</span> <span class="cs">"100% OK"</span><span class="cp">;</span>'},
+    {n:'5',c:'  <span class="ck">--lighthouse</span><span class="cp">:</span> <span class="cn">97</span><span class="cp">;</span>'},
+    {n:'6',c:'<span class="cp">}</span>'},
+  ]},
+  {f:'build.js',l:[
+    {n:'1',c:'<span class="ck">function</span> <span class="cf">build</span><span class="cp">() {</span>'},
+    {n:'2',c:'  <span class="cf">codeManuel</span><span class="cp">();</span> <span class="cc">// zéro template</span>'},
+    {n:'3',c:'  <span class="cf">optimiserSEO</span><span class="cp">();</span>'},
+    {n:'4',c:'  <span class="cf">lighthouse</span><span class="cp">();</span>'},
+    {n:'5',c:'  <span class="ck">return</span> <span class="cs">"97/100"</span><span class="cp">;</span>'},
+    {n:'6',c:'<span class="cp">}</span>'},
+  ]},
+  {f:'terminal',l:[
+    {n:'›',c:'<span class="cp">Déploiement...</span>'},
+    {n:'›',c:'<span class="ck">✔</span> <span class="cp">DNS configuré</span>'},
+    {n:'›',c:'<span class="ck">✔</span> <span class="cp">Hébergement actif</span>'},
+    {n:'›',c:'<span class="ck">✔</span> <span class="cp">Lighthouse </span><span class="cn">97</span><span class="cp">/100</span>'},
+    {n:'›',c:'<span class="cc">──────────────────</span>'},
+    {n:'›',c:'<span class="ck">✔ SITE EN LIGNE</span>'},
+  ]},
+];
+function showCode(i){
+  const s=snips[i];
+  const fw=document.getElementById('cw-file');
+  const bw=document.getElementById('cw-body');
+  if(!fw||!bw) return;
+  fw.textContent=s.f;
+  bw.innerHTML=s.l.map(r=>`<div class="cw-row"><span class="cw-ln">${r.n}</span><span class="cw-code">${r.c}</span></div>`).join('');
+}
+showCode(0);
+const stepEls=document.querySelectorAll('.step-item');
+stepEls.forEach(el=>{
+  el.addEventListener('click',()=>{
+    stepEls.forEach(s=>s.classList.remove('on'));
+    el.classList.add('on');
+    showCode(+el.dataset.i);
+  });
+});
+// Auto-highlight step visible au scroll
+stepEls.forEach(s=>new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){ stepEls.forEach(x=>x.classList.remove('on')); e.target.classList.add('on'); showCode(+e.target.dataset.i); }
+  });
+},{threshold:.65}).observe(s));
+
+// ── 3. SCROLL REVEAL GÉNÉRAL [data-r] ──
+const revealIO = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+},{threshold:.12});
+document.querySelectorAll('[data-r], .sep-line, .code-win').forEach(el=>revealIO.observe(el));
+
+// ── 4. FEAT CARDS ──
+const featIO = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+},{threshold:.15});
+document.querySelectorAll('.feat').forEach(el=>featIO.observe(el));
+
+// ── 5. KPI COMPTEURS (finale) ──
+function countUp(el, to, dur=1300){
+  let t0; const ease=p=>1-Math.pow(1-p,3);
+  (function tick(ts){
+    if(!t0) t0=ts;
+    const p=Math.min((ts-t0)/dur,1);
+    el.textContent=Math.round(ease(p)*to);
+    if(p<1) requestAnimationFrame(tick);
+  })(performance.now());
+}
+const kpiIO = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting) return;
+    const kpi=e.target;
+    kpi.classList.add('on');
+    const kn=kpi.querySelector('.kn');
+    if(kn && kn.dataset.to) countUp(kn,+kn.dataset.to);
+    kpiIO.unobserve(kpi);
+  });
+},{threshold:.3});
+document.querySelectorAll('.kpi').forEach(el=>kpiIO.observe(el));
+
+// ── 6. CTA BAND REVEAL ──
+const ctaIO = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting) return;
+    e.target.classList.add('on');
+    const vis=e.target.querySelector('.ctab-visual');
+    if(vis) vis.classList.add('on');
+    ctaIO.unobserve(e.target);
+  });
+},{threshold:.2});
+const band=document.querySelector('.cta-band');
+if(band) ctaIO.observe(band);
+
+// ── 7. HERO TITLE — words reveal ──
+// Les .word sont gérés par CSS (opacity:0 → transition au load)
+// On force les transitions après un tick pour que CSS s'applique bien
+requestAnimationFrame(()=>{
+  document.querySelectorAll('.hero__h1 .word').forEach((w,i)=>{
+    setTimeout(()=>{
+      w.style.opacity='1';
+      w.style.transform='none';
+    }, 180 + i*110);
+  });
+});
+
+// ── 8. STAGGER REVEAL POUR SECTIONS (eyebrow + h2) ──
+const sectionTitlesIO = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting) return;
+    e.target.classList.add('in');
+    sectionTitlesIO.unobserve(e.target);
+  });
+},{threshold:.2});
+document.querySelectorAll('.eyebrow,.h2').forEach(el=>sectionTitlesIO.observe(el));
+
+// ── 9. FEAT HOVER — ligne animée ──
+document.querySelectorAll('.feat').forEach(el=>{
+  el.addEventListener('mouseenter',()=>el.style.borderLeftColor='#111');
+  el.addEventListener('mouseleave',()=>el.style.borderLeftColor='transparent');
+});
+
+</script>
+</body>
+</html>

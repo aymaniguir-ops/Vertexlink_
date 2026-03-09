@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Contact Vertex Link — Réservez un appel gratuit, devis sous 24h. vertexlink33@gmail.com">
+<title>Contact — Vertex Link</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.page-hero{
+  padding:calc(var(--nav-h) + clamp(3rem,8vw,6rem)) var(--pad) clamp(3rem,6vw,5rem);
+  border-bottom:1px solid var(--border);position:relative;overflow:hidden;
+}
+.page-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,0,0,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.055) 1px,transparent 1px);background-size:48px 48px;}
+.page-hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 50% 50%,transparent 40%,rgba(255,255,255,.9) 100%);}
+.page-hero__inner{max-width:var(--max);margin:0 auto;position:relative;z-index:1;}
+.page-hero__num{font-family:var(--f-m);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);margin-bottom:.75rem;display:block;}
+.page-hero__h1{font-family:var(--f-d);font-weight:800;font-size:clamp(2.4rem,5vw,4.5rem);letter-spacing:-.045em;line-height:1.02;color:var(--white);margin-bottom:1.25rem;}
+.page-hero__h1 em{font-style:normal;color:var(--acc);}
+.page-hero__p{font-family:var(--f-m);font-size:.86rem;color:var(--muted);line-height:1.8;max-width:46ch;}
+
+/* ── CONTACT LAYOUT ── */
+.contact-grid{
+  display:grid;grid-template-columns:1fr 1.4fr;gap:4rem;
+  align-items:start;
+}
+
+/* Info col */
+.contact-info-title{
+  font-family:var(--f-d);font-weight:800;
+  font-size:clamp(1.5rem,3vw,2.2rem);
+  letter-spacing:-.035em;line-height:1.1;
+  color:var(--white);margin-bottom:1.25rem;
+}
+.contact-info-title em{font-style:normal;color:var(--acc);}
+.contact-info-p{font-family:var(--f-m);font-size:.82rem;color:var(--muted);line-height:1.8;margin-bottom:2.5rem;}
+
+.contact-links{display:flex;flex-direction:column;gap:1rem;margin-bottom:2.5rem;}
+.contact-link-item{
+  display:flex;align-items:center;gap:1rem;
+  padding:1.1rem 1.25rem;
+  background:var(--bg-2);border:1px solid var(--border);border-radius:10px;
+  transition:border-color .2s,background .2s;
+  color:inherit;
+}
+.contact-link-item:hover{border-color:var(--acc);background:var(--bg-3);}
+.cli-icon{
+  width:36px;height:36px;border-radius:8px;
+  background:var(--acc-dim);border:1px solid rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;flex-shrink:0;
+}
+.cli-label{font-family:var(--f-m);font-size:.68rem;color:var(--muted);letter-spacing:.04em;margin-bottom:.15rem;}
+.cli-value{font-family:var(--f-d);font-weight:700;font-size:.88rem;letter-spacing:-.01em;color:var(--white);}
+
+/* FAQ accord */
+.faq-list{display:flex;flex-direction:column;gap:0;margin-top:2rem;}
+.faq-item{border-bottom:1px solid var(--border);}
+.faq-item:first-child{border-top:1px solid var(--border);}
+.faq-q{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 0;
+  font-family:var(--f-d);font-weight:700;font-size:.88rem;
+  color:var(--white);cursor:none;
+  transition:color .2s;
+}
+.faq-q:hover{color:var(--acc);}
+.faq-arrow{
+  font-size:.75rem;color:var(--acc);
+  transition:transform .3s var(--ease);flex-shrink:0;
+}
+.faq-item.open .faq-arrow{transform:rotate(45deg);}
+.faq-a{
+  font-family:var(--f-m);font-size:.78rem;color:var(--muted);
+  line-height:1.75;overflow:hidden;max-height:0;
+  transition:max-height .35s var(--ease),padding .3s;
+}
+.faq-item.open .faq-a{max-height:200px;padding-bottom:1rem;}
+
+/* Form */
+.form-card{
+  background:var(--bg-2);border:1px solid var(--border);
+  border-radius:16px;padding:2.5rem;
+}
+.form-title{
+  font-family:var(--f-d);font-weight:800;font-size:1.2rem;
+  letter-spacing:-.025em;color:var(--white);margin-bottom:.375rem;
+}
+.form-sub{font-family:var(--f-m);font-size:.74rem;color:var(--muted);margin-bottom:2rem;}
+
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.form-group{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.25rem;}
+.form-label{font-family:var(--f-m);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
+.form-input,.form-select,.form-textarea{
+  background:var(--bg-3);border:1px solid var(--border-m);border-radius:8px;
+  padding:.75rem 1rem;
+  font-family:var(--f-m);font-size:.82rem;color:var(--white);
+  outline:none;
+  transition:border-color .2s,box-shadow .2s;
+  width:100%;
+}
+.form-input:focus,.form-select:focus,.form-textarea:focus{
+  border-color:var(--acc);
+  box-shadow:0 0 0 3px var(--acc-dim);
+}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--faint);}
+.form-select{color:var(--muted);}
+.form-select option{background:var(--bg-3);color:var(--white);}
+.form-textarea{resize:vertical;min-height:120px;line-height:1.65;}
+
+.form-submit{
+  width:100%;padding:.875rem;
+  font-family:var(--f-d);font-weight:800;font-size:.9rem;
+  background:var(--white);color:var(--bg);border-radius:8px;
+  border:none;cursor:none;
+  transition:background .2s,transform .25s var(--ease),box-shadow .25s;
+  box-shadow:0 2px 20px var(--acc-glow);
+}
+.form-submit:hover{background:var(--acc-lt);transform:translateY(-2px);box-shadow:0 8px 36px var(--acc-glow);}
+
+.form-note{
+  font-family:var(--f-m);font-size:.68rem;
+  color:var(--faint);text-align:center;margin-top:.875rem;
+}
+#form-success{
+  display:none;text-align:center;padding:2rem;
+  font-family:var(--f-d);font-weight:700;font-size:1rem;color:var(--white);
+}
+
+@media(max-width:960px){
+  .contact-grid{grid-template-columns:1fr;}
+  .form-row{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div id="vl-cursor"></div><div id="vl-ring"></div><div id="vl-prog"></div>
+
+<header class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">
+      <img src="logo.png" alt="VL" style="width:32px;height:32px;object-fit:contain;background:#111111;border-radius:9px;padding:5px;">
+      <span style="font-family:var(--f-d);font-weight:800;font-size:1.05rem;letter-spacing:-.02em;color:#111111">Vertex Link</span>
+    </a>
+    <nav class="nav__links">
+      <a href="index.html" class="nav__link">Accueil</a>
+      <a href="services.html" class="nav__link">Services</a>
+      <a href="portfolio.html" class="nav__link">Portfolio</a>
+      <a href="a-propos.html" class="nav__link">À propos</a>
+      <a href="contact.html" class="nav__link active">Contact</a>
+    </nav>
+    <a href="contact.html" class="nav__cta">Réserver un appel</a>
+    <button class="nav__burger"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<nav class="mobile-nav">
+  <a href="index.html">Accueil</a><a href="services.html">Services</a>
+  <a href="portfolio.html">Portfolio</a><a href="a-propos.html">À propos</a>
+  <a href="contact.html" class="active">Contact</a>
+  <a href="contact.html" class="m-cta">Réserver un appel →</a>
+</nav>
+
+<main>
+
+<div class="page-hero">
+  <div class="page-hero__inner">
+    <span class="page-hero__num" data-r>Contact</span>
+    <h1 class="page-hero__h1" data-r data-d="1">Parlons de<br><em>votre projet.</em></h1>
+    <p class="page-hero__p" data-r data-d="2">Devis gratuit, réponse sous 24h. Pas de téléprospection, pas de relance agressive — juste une conversation.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="section__inner">
+    <div class="contact-grid">
+
+      <!-- Col gauche -->
+      <div data-r>
+        <h2 class="contact-info-title">On vous répond<br><em>sous 24h.</em></h2>
+        <p class="contact-info-p">Décrivez votre projet, votre activité et vos objectifs. On vous envoie un devis clair et détaillé, sans engagement.</p>
+
+        <div class="contact-links">
+          <a href="mailto:vertexlink33@gmail.com" class="contact-link-item">
+            <div class="cli-icon">✉</div>
+            <div><div class="cli-label">Email</div><div class="cli-value">vertexlink33@gmail.com</div></div>
+          </a>
+          <a href="https://instagram.com/vertexlink_" target="_blank" class="contact-link-item">
+            <div class="cli-icon">📸</div>
+            <div><div class="cli-label">Instagram</div><div class="cli-value">@vertexlink_</div></div>
+          </a>
+        </div>
+
+        <p class="eyebrow" style="margin-bottom:0">Questions fréquentes</p>
+        <div class="faq-list">
+          <div class="faq-item">
+            <div class="faq-q">Quel est le délai de livraison ? <span class="faq-arrow">+</span></div>
+            <div class="faq-a">Site vitrine livré en 14 jours, landing page en 7 jours. Le délai commence après validation du brief et de la maquette.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Le paiement en 2× est disponible ? <span class="faq-arrow">+</span></div>
+            <div class="faq-a">Oui. Pour tous les forfaits : 50% à la commande, 50% à la livraison. Aucun frais supplémentaire.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Dois-je fournir le contenu ? <span class="faq-arrow">+</span></div>
+            <div class="faq-a">Idéalement oui — textes, logo, photos si disponibles. Si vous n'avez pas de contenu, on peut vous accompagner sur le copywriting.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Et après la livraison ? <span class="faq-arrow">+</span></div>
+            <div class="faq-a">Support inclus selon le forfait (60 jours à 6 mois). Corrections, ajustements, petites évolutions — on reste disponibles.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulaire -->
+      <div data-r data-d="2">
+        <div class="form-card">
+          <div class="form-title">Démarrer un projet</div>
+          <div class="form-sub">Réponse garantie sous 24h</div>
+
+          <form id="contact-form" action="https://formspree.io/f/xovqqevz" method="POST">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="nom">Nom</label>
+                <input class="form-input" type="text" id="nom" name="nom" placeholder="Votre nom" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="email">Email</label>
+                <input class="form-input" type="email" id="email" name="email" placeholder="votre@email.com" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="service">Prestation souhaitée</label>
+              <select class="form-select" id="service" name="service">
+                <option value="">Choisir une prestation…</option>
+                <option value="vitrine">Site Vitrine — 497€</option>
+                <option value="landing">Landing Page — 297€</option>
+                <option value="seo">Audit & SEO — Sur devis</option>
+                <option value="autre">Autre / Je ne sais pas encore</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="projet">Décrivez votre projet</label>
+              <textarea class="form-textarea" id="projet" name="message" placeholder="Votre activité, vos objectifs, ce que vous souhaitez…" required></textarea>
+            </div>
+
+            <button type="submit" class="form-submit">Envoyer ma demande →</button>
+            <p class="form-note">Sans engagement · Devis gratuit · Réponse sous 24h</p>
+          </form>
+          <div id="form-success">
+            <div style="font-size:2rem;margin-bottom:.75rem">✓</div>
+            Message envoyé ! On vous répond sous 24h.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__top">
+      <div>
+        <div class="footer__logo"><img src="logo.png" alt="VL" style="width:28px;height:28px;object-fit:contain;background:#111111;border-radius:8px;padding:4px;">VertexLink</div>
+        <p class="footer__desc">Agence web spécialisée en sites vitrines, landing pages et SEO. Code sur mesure.</p>
+      </div>
+      <div class="footer__col"><h3 class="footer__col-title">Navigation</h3><ul><li><a href="index.html">Accueil</a></li><li><a href="services.html">Services</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="a-propos.html">À propos</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer__col"><h3 class="footer__col-title">Services</h3><ul><li><a href="services.html">Site Vitrine — 497€</a></li><li><a href="services.html">Landing Page — 297€</a></li><li><a href="services.html">Audit & SEO</a></li></ul></div>
+      <div class="footer__col"><h3 class="footer__col-title">Contact</h3><ul><li><a href="mailto:vertexlink33@gmail.com">vertexlink33@gmail.com</a></li><li><a href="https://instagram.com/vertexlink_" target="_blank">@vertexlink_</a></li></ul></div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__copy">© 2025 Vertex Link — Tous droits réservés</p>
+      <div class="footer__social"><a href="mailto:vertexlink33@gmail.com">Email</a><a href="https://instagram.com/vertexlink_" target="_blank">Instagram</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+<script>
+// FAQ
+document.querySelectorAll('.faq-item').forEach(item=>{
+  item.querySelector('.faq-q').addEventListener('click',()=>{
+    const open = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+    if(!open) item.classList.add('open');
+  });
+});
+// Form
+const form = document.getElementById('contact-form');
+if(form){
+  form.addEventListener('submit',async e=>{
+    e.preventDefault();
+    const btn = form.querySelector('.form-submit');
+    btn.textContent='Envoi…';btn.disabled=true;
+    try{
+      const r = await fetch(form.action,{method:'POST',body:new FormData(form),headers:{Accept:'application/json'}});
+      if(r.ok){ form.style.display='none'; document.getElementById('form-success').style.display='block'; }
+      else{ btn.textContent='Erreur — réessayez'; btn.disabled=false; }
+    }catch(){ btn.textContent='Erreur réseau'; btn.disabled=false; }
+  });
+}
+</script>
+</body>
+</html>
